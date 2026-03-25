@@ -176,8 +176,188 @@ These Flexbox properties provide a robust and flexible way to handle content ove
 
 
 ### Grid
+The CSS Grid layout allows us to control the positioning of child elements along both axes. The element with display: grid is called the grid container, and its child elements are known as grid items.
 
+By default, when display: grid is applied, the items are arranged in a single column, with each grid item placed in its own cell. This layout differs from the default block layout, where elements stack vertically.
+
+Grid Template
+The grid-template- properties allow us to control the size and arrangement of columns in a grid layout.
+
+grid-template-columns defines the number and size of columns. Values can be space-separated, such as "auto", to automatically size the columns. For example, four "auto" values create four automatically sized columns.
+
+If the columns are uniform in size, we can use the repeat() function, which simplifies the declaration by specifying the number of columns and their size. This reduces redundancy when all columns are the same size.
+
+The fr (fractional unit) is useful for defining columns that take up a proportion of available space. For example, 1fr makes a column take up 1 fraction of the available space.
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+This example will create a grid with three columns. The first and third columns each take up 1 fraction of the available space, while the second column takes up 2 fractions, making it twice as wide.
+
+Grid Flow
+By default, the grid fills out from left to right, row by row. However, we can modify this flow using the grid-auto-flow property. Declaring grid-auto-flow: column will make the grid flow from top to bottom, filling the first column first, then moving onto the next column.
+
+.grid-container {
+
+Aligning Items
+To control how items align within their grid cells, CSS Grid provides several properties:
+
+justify-items aligns grid items horizontally within their cells.
+align-items aligns grid items vertically within their cells.
+justify-self allows for horizontal alignment on individual grid items.
+align-self allows for vertical alignment on individual grid items.
+These properties can be applied to either the entire grid or individual grid items, giving you flexibility in how each item is positioned.
 ### Media Queries
+Basic Syntax of a Media Query
+A media query begins with the @media rule, followed by the condition you want to check, such as max-width or min-width. Inside the curly braces, you place the CSS rules that will be applied if the condition is met.
+
+@media (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
+This rule will apply the background-color: lightblue; style only when the viewport is 600px wide or less.
+
+Media Features
+You can specify various conditions in your media queries, called media features. These features allow you to target specific properties of the viewport or device.
+
+Width and Height
+The most common media features you’ll use are width and height. You can target devices based on their minimum (min-width) or maximum (max-width) dimensions.
+
+@media (min-width: 768px) {
+  .container {
+    width: 80%;
+  }
+}
+This rule applies when the viewport is at least 768px wide.
+
+Orientation
+You can target devices based on their orientation—whether they are in portrait or landscape mode.
+
+@media (orientation: landscape) {
+  .header {
+    font-size: 2rem;
+  }
+}
+This rule will apply the larger font size only when the device is in landscape mode.
+
+Applying Media Queries to Responsive Design
+By using media queries, you can apply specific styles depending on the viewport's width or orientation. This allows you to create layouts that adjust for different screen sizes.
+
+@media (max-width: 600px) {
+  .header {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .header {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .header {
+    font-size: 2rem;
+  }
+}
+For small screens (max-width: 600px), the header font size is set to 1rem.
+For medium screens (601px to 1024px), the header font size is 1.5rem.
+For larger screens (1025px and above), the header font size is set to 2rem.
+Order of Media Queries
+The order in which media queries are declared in the CSS file matters. CSS follows a cascading order, meaning that the styles from the last declared rule take precedence.
+
+@media (max-width: 1000px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: 100%;
+  }
+}
+The first rule applies for viewports up to 1000px wide, setting the container width to 90%.
+The second rule applies for viewports up to 700px wide, setting the container width to 100%. Since it's declared after the first rule, it will override the width for smaller devices.
+Combining Media Features with Logical Operators
+You can combine multiple conditions using logical operators such as and, or, and not to create more complex queries.
+
+and: Both conditions must be true.
+
+@media (min-width: 640px) and (orientation: portrait) {
+  .sidebar {
+    display: block;
+  }
+}
+This rule will apply if the viewport is at least 640px wide and the device is in portrait mode.
+
+or: Either condition must be true.
+
+@media (min-width: 640px), (orientation: landscape) {
+  .content {
+    margin: 20px;
+  }
+}
+This rule applies if the viewport is at least 640px wide or the device is in landscape mode.
+
+not: Excludes a condition.
+
+@media not (min-width: 1000px) {
+  .header {
+    background-color: red;
+  }
+}
+This rule applies for all viewports except those that are at least 1000px wide.
+
+Conclusion
+CSS Media Queries are a powerful tool for making websites responsive. By targeting different media features like width, height, and orientation, you can apply different styles based on the user's device and screen size. Combining media features with logical operators allows for even more precise control over your designs. Remember to structure your queries carefully, as their order can affect which rules are applied.
+
+Additional Media Features for Website Design
+CSS Media Queries offer more than just width, height, and orientation. Below are a few additional media features that help enhance website design.
+
+Aspect Ratio
+Targets devices with specific width-to-height ratios, useful for maintaining aspect proportions (e.g., video containers).
+
+@media (aspect-ratio: 16/9) {
+  .video-container {
+    padding: 56.25% 0 0 0;
+  }
+}
+Resolution
+Targets devices with a specific pixel density, useful for delivering high-DPI images (e.g., Retina displays).
+
+@media (min-resolution: 192dpi) {
+  .logo {
+    background-image: url('logo-high-res.png');
+  }
+}
+Hover and Pointer
+Detects if a device supports hover (like a mouse) or the precision of the pointing device (e.g., fine-tuned pointer vs touchscreen).
+
+@media (hover: hover) {
+  .button {
+    cursor: pointer;
+  }
+}
+
+@media (pointer: fine) {
+  .button {
+    padding: 15px;
+  }
+}
+Prefers Reduced Motion
+Allows you to provide alternative styles for users who prefer reduced motion for accessibility reasons.
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-element {
+    animation: none;
+    transition: none;
+  }
+}
+These media features help you target specific device characteristics and improve the user experience with adaptive designs and accessibility considerations.
+
 
 ### Responsive Web Design
 
