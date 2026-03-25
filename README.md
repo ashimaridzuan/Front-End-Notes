@@ -185,6 +185,14 @@ These Flexbox properties provide a robust and flexible way to handle content ove
 
 
 
+Why Do We Need CSS Methodologies?
+Let’s start with the core issue: CSS is globally scoped. This means that styles declared in a single stylesheet are accessible throughout your entire project. While this global nature allows for flexibility, it also introduces some serious challenges:
+
+The Cascade Effect: CSS stands for "Cascading Style Sheets." Any change made within your stylesheet can cascade throughout your entire codebase, affecting elements you didn’t intend to modify. For small projects, this is manageable, but as your CSS grows to hundreds or even thousands of lines, the cascading effect can lead to unintended consequences.
+Lack of Organization: As styles accumulate, a single CSS file can become bloated and difficult to navigate. Without proper organization, finding and updating styles becomes time-consuming.
+Naming Conflicts: Because CSS has no built-in scoping mechanism, class and ID names can easily conflict, leading to unpredictable behavior. High specificity can further complicate things, making it harder to override styles when needed.
+Maintainability Issues: When projects scale up, maintaining a single global CSS file becomes a daunting task. It becomes harder to add new features without breaking existing styles or introducing redundancy.
+
 
 
 
